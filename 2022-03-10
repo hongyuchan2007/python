@@ -1,0 +1,25 @@
+#a = 'hello python'
+#print(a.count('o')) #count 괄호안 문자 개수 세주기
+#print(a.find('x')) #괄호 안 문자 몇번째인지
+#print(a.index('x'))
+#print(','.join(a))
+#print(a.replace('py','my'))
+#print(a.split())
+#print(a.upper())
+#print(a.lower())
+#b= "....app.le...."
+# print('|'+b.lstrip('.')+'|')
+# print('|'+b.strip('.')+'|')
+# print('|'+b.rstrip('.')+'|')
+# phone_number = "010-1111-2222"
+# print(phone_number.replace('-',' '))
+# url = "http://sharebook.kr"
+# print(url[-2:])
+#a = url.split('.')
+#print(a[-1])
+#string = 'abcdfe2a3a'
+#print(string.replace('a','A'))
+# t1 = 'python'
+# t2 = 'java'
+# t3= t1 +' '+ t2+ ' '
+# print(t3*4)
