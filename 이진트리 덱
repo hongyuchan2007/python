@@ -1,0 +1,129 @@
+# class dequeelement:
+#     def __init__(self,data,left,right):
+#         self.data = data
+#         self.left = left
+#         self.right = right
+# class deque:
+#     def __init__(self):
+#         self.rear = None
+#         self.front = None
+#     def insert_rear(self,data):
+#         if self.rear is None:
+#             elem = dequeelement(data,None,None)
+#             self.rear = elem
+#             self.front = elem
+#         else:
+#             elem = dequeelement(data, None, self.rear)
+#             self.rear.left = elem
+#             self.rear = elem
+#     def insert_front(self,data):
+#         if self.front is None:
+#             elem = dequeelement(data,None,None)
+#             self.front = elem
+#             self.rear = elem
+#         else:
+#             elem = dequeelement(data,self.front,None)
+#             self.front.right = elem
+#             self.front = elem
+#     def delete_rear(self):
+#         if self.rear is None:
+#             return None
+#         temp = self.rear
+#         if self.rear == self.front:
+#             self.front=self.rear = None
+#             return temp.data
+#         else:
+#             temp = self.rear
+#             self.rear = self.rear.right
+#             self.rear.left = None
+#             return temp.data
+#     def delete_front(self):
+#         if self.front is None:
+#             return None
+#         temp = self.front
+#         if self.rear == self.front:
+#             self.rear = self.front = None
+#             return temp.data
+#         else:
+#             self.front = self.front.left
+#             self.front.right = None
+#             return temp.data
+#     #TODO reverse 구현
+#     def reverse(self):
+#         c = self.front
+#
+#         while c:
+#             c.right,c.left = c.left,c.right
+#             c = c.right
+#         self.rear,self.front = self.front,self.rear
+# dq = deque()
+# for i in range(1,6):
+#     dq.insert_front(i)
+# dq.reverse()
+# for i in range(5):
+#     print(dq.delete_front())
+
+
+
+
+
+class tree_node:
+    def __init__(self,data,left,right):
+        self.data = data
+        self.left = left
+        self.right = right
+
+
+class binary_tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self,data):
+        node = tree_node(data,None,None)
+        if self.root == None:
+            self.root = node
+        else:
+            curr = self.root
+            while True:
+                if curr.data > node.data:
+                    if curr.left == None:
+                        curr.left = node
+                        return
+                    curr = curr.left
+                elif curr.data < node.data:
+                    if curr.right == None:
+                        curr.right = node
+                        return
+                    curr = curr.right
+
+
+
+    def delete(self,data):
+        if self.root == None:
+            return None
+        else:
+            curr = self.root
+            pcurr = None
+            while True:
+                if curr.data == data:
+                    #1. curr의 자식노드가 한개도 없을경우
+                    if curr.left == None and curr.right == None:
+                        if pcurr.left == curr:
+                            pcurr.left =  None
+                        elif pcurr.right == curr:
+                            pcurr.right = None
+
+                    #2. curr의 자식노드가 한개 있을겨우
+                    elif curr.left == None and curr.right != None:
+                        if pcurr.left == curr:
+                            pcurr.left = curr.right
+
+                    elif curr.left != None and curr.right == None:
+                        if pcurr.right == curr:
+                            pcurr.right = curr.left
+                elif curr.data > data:
+                    pcurr = curr
+                    curr = curr.left
+                else:
+                    pcurr = curr
+                    curr =curr.right
