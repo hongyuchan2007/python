@@ -1,0 +1,33 @@
+# a = input()
+# b = list((input().split(' ')))
+#
+# c = input()
+# d = list((input().split(' ')))
+# aa = []
+# dd = []
+# for i in range(len(b)):
+#     b[i] = int(b[i])
+#
+# for j in range(len(d)):
+#     d[j] = int(d[j])
+# b.sort()
+#
+# def binary_search(list_a,data):
+#     left = 0
+#     right = len(list_a) -1
+#
+#     while right >= left:
+#         mid = (left+right) // 2
+#         if list_a[mid] == data:
+#             return 1
+#
+#         elif list_a[mid] > data:
+#             right = mid-1
+#         elif list_a[mid] < data:
+#             left = mid +1
+#     return 0
+# for i in range(len(d)):
+#    print(binary_search(b,d[i]))
+a= int(input())
+for i in range(a):
+    b = input()
