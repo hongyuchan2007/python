@@ -1,0 +1,11 @@
+def solution(record):
+    answer = []
+    for s in record:
+        t = s.split(' ')
+        a = t[0]
+    if a == 'enter':
+        id = a[1]
+        name = a[2]
+    
+    return answer
+print(solution(["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]))
