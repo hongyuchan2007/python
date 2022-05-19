@@ -1,0 +1,11 @@
+a = int(input())
+b = a
+for i in range(a):
+    c = input()
+    for j in range(len(c)):
+        if c[j] == c[j+1]:
+            pass
+        elif c[j] in c[j+1:]:
+            b -= 1
+print(b)  
+            
