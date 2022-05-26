@@ -1,0 +1,27 @@
+def solution(a):
+    b = []
+    for j in a:
+        b.append(j)
+
+    for j in range(len(b)):
+        for i in range(j):
+
+            if len(b) == 0:
+                return 1
+
+            if b[i] == b[i + 1]:
+                b.pop(i)
+                b.pop(i-1)
+                print(b)
+
+        for k in b:
+
+             p=(''.join(b))
+             print((''.join(b)))
+             #if k*2 not in p:
+
+
+
+
+
+print(solution("아으으아으으"))
