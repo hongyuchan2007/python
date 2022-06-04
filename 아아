@@ -1,0 +1,40 @@
+def binary(arr,n): #// 몫 %나머지
+    binary_list = []
+    for i in arr:
+        i_binary = []
+        while i:
+            i_binary.append(i%2)
+            i = i // 2
+        i_binary.reverse()
+        while len(i_binary) != n:
+            i_binary.insert(0,0)
+        binary_list.append(i_binary)
+    return binary_list
+
+def solution(n, arr1, arr2):
+    answer = []
+    first_arr = binary(arr1,n)
+    second_arr = binary(arr1,n)
+
+    for j in range(n):
+        block_list = ''
+        for k in range(n):
+            if first_arr[j][k] == 0 and second_arr[j][k] == 0:
+                block_list += ' '
+            else:
+                block_list += '#'
+        answer.append(block_list)
+    return answer
+
+
+
+
+
+
+
+    #TODO:
+
+
+    
+print(solution(5,[9, 20, 28, 18, 11],[30, 1, 21, 17, 28]
+))
