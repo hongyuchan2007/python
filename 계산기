@@ -1,0 +1,219 @@
+class Operater:
+
+    def __init__(self,op:str):
+        self.op =op
+        if op not in ('+','-','*','/'):
+            raise ValueError("사용 가능한 연산자가 아닙니다")
+
+    def __eq__(self, other):
+
+        if type(other) != Operater:
+            raise TypeError(f'{type(other)}타입과의 비교는 지원하지 않습니다')
+
+        if self.op in ('+','-') and other.op in ('+','-'):
+            return True
+        elif self.op in ('*','/') and other.op in ('*','/'):
+            return True
+        else:
+            return False
+
+
+    def __lt__(self, other):
+        if type(other) != Operater:
+            raise TypeError(f'{type(other)}타입과의 비교는 지원하지 않습니다')
+
+
+        return self.op in ('+','-') and other.op in ('*','/')
+
+    def __le__(self, other):
+        if type(other) != operator:
+            raise TypeError(f'{type(other)}타입과의 비교는 지원하지 않습니다')
+
+        return self.__eq__(other) or self.__lt__(other)
+
+    def __gt__(self, other):
+        if type(other) != Operater:
+            raise TypeError(f'{type(other)}타입과의 비교는 지원하지 않습니다')
+
+        return not self.__le__(other)
+
+    def __ge__(self, other):
+        if type(other) != Operater:
+            raise TypeError(f'{type(other)}타입과의 비교는 지원하지 않습니다')
+
+        return not self.__lt__(other)
+
+    def __repr__(self):
+        return f'Operater({self.op})'
+
+    def operation(self,x,y):
+        if self.op == '+':
+            return x + y
+        elif self.op == '-':
+            return x - y
+        elif self.op == '*':
+            return x * y
+        elif self.op == '/':
+            return x / y
+
+
+class IntCalc:
+    def __init__(self):
+        self.infix_expr = []
+
+    def set_expression(self,expr:str):
+        self.infix_expr.clear()
+        operand = ''
+        for x in expr:
+            if x.isdigit():
+                operand += x
+            else:
+                if len(operand) > 0:
+                    self.infix_expr.append(int(operand))
+                    operand = ''
+
+                self.infix_expr.append(Operater(x))
+
+        if len(operand) > 0:
+            self.infix_expr.append(int(operand))
+        print('수식을 리스트로', self.infix_expr)
+
+
+    def infix_to_prefix(self):
+        prefix_expr = []
+        stack = []
+
+        for i in self.infix_expr:
+            if type(i) == int:
+                prefix_expr.append(i)
+            else:
+                while len(stack) > 0 and stack[-1] >= i:
+                    prefix_expr.append(stack.pop())
+                stack.append(i)
+
+        while stack:
+            prefix_expr.append(stack.pop())
+
+        return prefix_expr
+
+    def evaluation(self):
+        stack = []
+        prefix = self.infix_to_prefix()
+        for i in prefix:
+            if type(i) == int:
+                stack.append(i)
+            else:
+                num2 = stack.pop()
+                num1 = stack.pop()
+                stack.append(i.operation(num1,num2))
+
+        if len(stack) > 1:
+            raise ValueError('잘못된 수식입니다')
+        else:
+            return stack.pop()
+#
+# cal1 = IntCalc()
+# cal1.set_expression('12*20-3+4')
+# cal1.infix_to_prefix()
+# print(cal1.evaluation())
+
+
+--------------------------------------------------------
+
+from tkinter import *
+from tkinter.ttk import *
+from dqwfq import *
+
+
+root = Tk()
+root.title('calculater')
+root.geometry('900x300')
+
+frm = Frame(root)
+frm.pack(expand=True)
+
+ent_expr = Entry(frm,font= '궁서체 50')
+ent_expr.grid(column=0,row=0,columnspan=4,sticky='wens')
+
+btn_plus = Button(frm,text= '+')
+btn_plus.grid(column=3,row =1,sticky='wens')
+btn9 = Button(frm,text=9)
+btn9.grid(column=2,row =1,sticky='wens')
+btn8 = Button(frm,text=8)
+btn8.grid(column=1,row =1,sticky='wens')
+btn7 = Button(frm,text=7)
+btn7.grid(column=0,row =1,sticky='wens')
+btn_minus = Button(frm,text='-')
+btn_minus.grid(column=3,row =2,sticky='wens')
+btn6 = Button(frm,text=6)
+btn6.grid(column=2,row =2,sticky='wens')
+btn5 = Button(frm,text=5)
+btn5.grid(column=1,row =2,sticky='wens')
+btn4 = Button(frm,text=4)
+btn4.grid(column=0,row =2,sticky='wens')
+btn_multiply = Button(frm,text='*')
+btn_multiply.grid(column=3,row =3,sticky='wens')
+btn3 = Button(frm,text=3)
+btn3.grid(column=2,row =3,sticky='wens')
+btn2 = Button(frm,text=2)
+btn2.grid(column=1,row =3,sticky='wens')
+btn1 = Button(frm,text=1)
+btn1.grid(column=0,row =3,sticky='wens')
+btn_division = Button(frm,text='/')
+btn_division.grid(column=3,row =4,sticky='wens')
+btn_equal = Button(frm,text='=')
+btn_equal.grid(column=2,row =4,sticky='wens')
+btn0 = Button(frm,text=0)
+btn0.grid(column=1,row =4,sticky='wens')
+btn_delete = Button(frm,text='del')
+btn_delete.grid(column=0,row =4,sticky='wens')
+
+def input_expr(txt:str):
+    expr = ent_expr.get()
+    if len(expr) > 0 and expr[-1] in ['+','-','/','*'] and txt in ['+','-','/','*']:
+        lexpr = list(expr)
+        lexpr[-1] = txt
+        expr = ''.join(lexpr)
+    elif len(expr) == 0 and txt in ('=','-'):
+        expr += '0' + txt
+    else:
+        expr += txt
+    ent_expr.delete(0,'end')
+    ent_expr.insert(0,expr)
+
+
+def get_result():
+    expr = ent_expr.get()
+    if len(expr) == 0:
+        return
+    if expr[-1] in ['+','-','/','*']:
+        expr = expr[:-1]
+    cal1 = IntCalc()
+    cal1.set_expression(expr)
+    result = cal1.evaluation()
+    ent_expr.delete(0,'end')
+    ent_expr.insert(0,str(result))
+
+
+btn9.configure(command=lambda :input_expr('9'))
+btn8.configure(command=lambda :input_expr('8'))
+btn7.configure(command=lambda :input_expr('7'))
+btn6.configure(command=lambda :input_expr('6'))
+btn5.configure(command=lambda :input_expr('5'))
+btn4.configure(command=lambda :input_expr('4'))
+btn3.configure(command=lambda :input_expr('3'))
+btn2.configure(command=lambda :input_expr('2'))
+btn1.configure(command=lambda :input_expr('1'))
+btn0.configure(command=lambda :input_expr('0'))
+
+btn_minus.configure(command=lambda : input_expr('-'))
+btn_plus.configure(command=lambda : input_expr('+'))
+btn_multiply.configure(command=lambda : input_expr('*'))
+btn_division.configure(command=lambda : input_expr('/'))
+
+btn_equal.configure(command=lambda : get_result())
+btn_delete.configure(command=lambda: ent_expr.delete(0,'end'))
+
+
+
+root.mainloop()
