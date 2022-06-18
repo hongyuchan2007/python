@@ -1,0 +1,112 @@
+# # a = int('11',7)
+# # print(a)
+# # a = int('1Z',36)
+# # print(a)
+# #  a = int('0o10',0) #<< n진법
+# #  print(a)
+# class Hangulnumber:
+#     def __init__(self,hangul_num='영'):
+#         self.hangul_num = hangul_num
+#     def __int__(self):
+#         num = ''
+#         for hnum in self.hangul_num:
+#             if hnum == '영':
+#                 num += "0"
+#             elif hnum == '일':
+#                 num += '1'
+#             elif hnum == '이':
+#                 num += '2'
+#             elif hnum == '삼':
+#                 num += '3'
+#             elif hnum == '사':
+#                 num += '4'
+#             elif hnum == '오':
+#                 num += '5'
+#             elif hnum == '육':
+#                 num += '6'
+#             elif hnum == '칠':
+#                 num += '7'
+#             elif hnum == '팔':
+#                 num += '8'
+#             elif hnum == '구':
+#                 num += '9'
+#             else:
+#                 raise ValueError(self.hangul_num + '은 정수로 변화할 수 없습니다')
+#         return int(num)
+#
+#     def __float__(self):
+#         num = map(Hangulnumber,self.hangul_num.split("점"))
+#         num = '.'.join(list(map(lambda x: str(int(x)), num)))
+#         return float(num)
+#
+#
+# kor_num = Hangulnumber("칠팔구사오육일이삼영")
+# normal_num = int(kor_num)
+# print(normal_num)
+# class IntegerToHangul:
+#     def __init__(self, int_num =0):
+#         self.int_num = int_num
+
+    # def __str__(self):
+    #     num = ''
+    #     for hnum in str(self.int_num):
+    #         if hnum == '0':
+    #             num += "영"
+    #         elif hnum == '1':
+    #             num += '일'
+    #         elif hnum == '2':
+    #             num += '이'
+    #         elif hnum == '3':
+    #             num += '삼'
+    #         elif hnum == '4':
+    #             num += '사'
+    #         elif hnum == '5':
+    #             num += '오'
+    #         elif hnum == '6':
+    #             num += '육'
+    #         elif hnum == '7':
+    #             num += '칠'
+    #         elif hnum == '8':
+    #             num += '팔'
+    #         elif hnum == '9':
+    #             num += '구'
+    #         else:
+    #             raise ValueError(self.int_num + int('은 정수로 변화할 수 없습니다'))
+    #     return str(num)
+
+    # def __str__(self):
+    #     kor_set = ['영','일','이','삼','사','오','육','칠','팔','구']
+    #     num = self.int_num
+    #     kor ' '
+    #
+    #     while num != 0:
+    #         kor = kor_set[num % 10] +kor
+    #         num //= 10
+    #
+    #     return kor
+
+from datetime import datetime
+
+class MyPlan:
+    def __init__(self,d_day):
+        self.d_day = d_day
+
+    def __bool__(self):
+        now = str(datetime.today()).split(" ")[0]
+        return now == self.d_day
+
+
+
+
+
+
+
+
+
+
+
+# normal_num = IntegerToHangul(12345)
+# kor_num = str(normal_num)
+# print(kor_num)
+
+
