@@ -109,4 +109,12 @@ class MyPlan:
 # kor_num = str(normal_num)
 # print(kor_num)
 
+class HangulStudy:
+     # 내부는 알아서 구현
+a = HangulStudy("백이십삼")
+print(int(a)) 출력:123
+a = HangulStudy(123)
+print(str(a)) #출력: "백이십삼"
+          
+
 
