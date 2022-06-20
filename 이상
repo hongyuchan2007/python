@@ -1,0 +1,91 @@
+#백이십삼
+#10201 만이십일
+class HangulStudy:
+
+    def __init__(self,hangul_num = '영'):
+        self.hangul_num = hangul_num
+    def __int__(self):
+        num = ''
+        # ab = self.hangul_num[-1:]
+        # self.hangul_num = self.hangul_num.replace('십', '')
+        # self.hangul_num = self.hangul_num.replace('백', '')
+        # self.hangul_num = self.hangul_num.replace('천', '')
+        # self.hangul_num = self.hangul_num.replace('만', '')
+        # self.hangul_num += ab
+        # print(self.hangul_num)
+        if self.hangul_num[-1:] == '십' and self.hangul_num[-1:] == '백' and self.hangul_num[-1:] == '천' and self.hangul_num[-1:] == '만':
+            ab = self.hangul_num[-1:]
+            self.hangul_num = self.hangul_num.replace('십','')
+            self.hangul_num = self.hangul_num.replace('백','')
+            self.hangul_num = self.hangul_num.replace('천','')
+            self.hangul_num = self.hangul_num.replace('만', '')
+            self.hangul_num = self.hangul_num + ab
+            for hnum in self.hangul_num:
+
+                if hnum == '영':
+                    num += "0"
+                elif hnum == '일':
+                    num += '1'
+                elif hnum == '이':
+                    print(self.hangul_num)
+                    num += '2'
+                elif hnum == '삼':
+                    num += '3'
+                elif hnum == '사':
+                    num += '4'
+                elif hnum == '오':
+                    num += '5'
+                elif hnum == '육':
+                    num += '6'
+                elif hnum == '칠':
+                    num += '7'
+                elif hnum == '팔':
+                    num += '8'
+                elif hnum == '구':
+                    num += '9'
+                elif hnum == '십':
+                    num += '0'
+                elif hnum == '백':
+                    num += '00'
+                elif hnum == '천':
+                    num += '000'
+                elif hnum == '만':
+                    num += '0000'
+
+                else:
+                    raise ValueError(self.hangul_num + '은 정수로 변화할 수 없습니다')
+
+        else:
+            self.hangul_num = self.hangul_num.replace('십', '')
+            self.hangul_num = self.hangul_num.replace('백', '')
+            self.hangul_num = self.hangul_num.replace('천', '')
+            self.hangul_num = self.hangul_num.replace('만', '')
+            for hnum in self.hangul_num:
+                if hnum == '영':
+                    num += "0"
+                elif hnum == '일':
+                    num += '1'
+                elif hnum == '이':
+                    num += '2'
+
+                elif hnum == '삼':
+                    num += '3'
+                elif hnum == '사':
+                    num += '4'
+                elif hnum == '오':
+                    num += '5'
+                elif hnum == '육':
+                    num += '6'
+                elif hnum == '칠':
+                    num += '7'
+                elif hnum == '팔':
+                    num += '8'
+                elif hnum == '구':
+                    num += '9'
+                else:
+                    raise ValueError(self.hangul_num + '은 정수로 변화할 수 없습니다')
+        return int(num)
+a = HangulStudy('이백')
+print(int(a))
+
+
