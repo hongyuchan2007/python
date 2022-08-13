@@ -1,0 +1,56 @@
+heap = [0]
+
+def insert(n):
+    heap.append(n)
+    c = len(heap) - 1
+    while c != 0:
+        p = c // 2
+        if heap[p] > heap[c]:
+            heap[p], heap[c] = heap[c] , heap[p]
+        else:
+            break
+        c = p
+
+def smallest():
+     if len(heap) == 0:
+         return None
+
+     value = heap[1]
+     last = heap.pop()
+     if len(heap) == 1:
+         return value
+     heap[1] = last
+     p = 1
+     while p * 2 < len(heap) - 1:
+         c0 = p * 2
+         c1 = p * 2 +1
+         minc = 0
+         if c1 <= len(heap) - 1:
+             minc = c0 if heap[c0] < heap[c1] else c1
+         else:
+             minc = c0
+         if heap[p] > heap[minc]:
+             heap[p], heap[minc] = heap[minc] , heap[p]
+
+         else:
+             break
+     return value
+insert(12)
+insert(10)
+insert(9)
+insert(3)
+insert(2)
+insert(1)
+
+print(heap)
+
+while len(heap) > 1:
+    print(smallest())
+
+def solution(scoville, K):
+    answer = 0
+
+
+
+    
+    return answer
