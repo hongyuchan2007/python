@@ -1,0 +1,132 @@
+def grade(a):
+    b = []
+    if a >= 90:
+        return 'A'
+    if a < 60:
+        return 'E'
+    for i in a:
+        b.append(i)
+
+    if b[0] == '8':
+        return 'B'
+    if b[0] == '7':
+        return 'C'
+    if b[0] == '6':
+        return 'D'
+
+
+def holsu(a):
+    b = []
+    for i in a:
+        if i % 2 == 1:
+            b.append(i)
+    return b
+
+def threesixnine(num):
+    s_num = str(num)
+    count = 0
+    for i in s_num:
+        if i in "369":
+            count += 1
+    if count > 0:
+        print("짝"* count)
+    else:
+        print(num)
+#cba
+def ph(*args):
+    a = 0
+    for i in args:
+        a += i
+    return a / len(args)
+
+# print(ph(1,2,3,4))
+def avg(x,*args):
+    return (x + sum(args)) / (1 + len(args))
+
+
+
+# a0 =1 ,a1=1, a2=2 ,a3=3, a4=5
+def fibonacci(n):
+    if n < 2:
+        return 1
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# 고차 함수
+# 파이썬의 함수는 객체다.
+#파이썬의 함수는 매개변수로 넘겨줄 수 있고, 함수 내에서 반환할 수 있다.
+#파이썬의 객체는 일급 객체, 그러므로 함수는 일급 함수라고 한다.
+
+def multiplier(n):
+    def multi(x):
+        return x * n
+    return multi
+multi2 = multiplier(2)
+multi3 = multiplier(3)
+# print(multi2(5))
+# print(multi3(5))
+
+#콜백 함수
+# 함수의 입력으로 들어가는 함수 객체를 콜백 함수라고 한다.
+def callback():
+    print("작업이 끝났습니다.")
+    def print_n(n, cb):
+        for i in range(1, n +1):
+            print(i)
+        cb()
+def f(func):
+    def result(x):
+        return func(x) * func(x)
+    return result
+
+def g(x):
+    return  x + 1
+h = f(g)
+# print(h(3))
+
+#가비지 컬렉션
+#더이상 참조되지 않는 객체(변수)를 파이썬의 가비지 컬렉터가 확인 후 메모리에서 삭제한다.
+
+
+#클로저
+#함수가 종료되었음에도 불구화고, 함수의 지역 변수를 참조하는
+#다른 객체가 존재하는 경우 그지역변수는 메오리에서 사라지지 않는다.
+#이를 클로저라고 한다.
+
+def factory():
+    count  = {'c':0}
+
+    def func():
+        count['c'] += 1
+        print(count['c'], "번 호출되었습니다")
+    return func
+# f = factory()
+# h = factory()
+# f()
+# f()
+# f()
+# h()
+# h()
+# h()
+
+
+#메모이제이션
+#이전에 도출한 결과를 기억하고 다음과 똑같은 입력이 들어오면
+#새로 계산하는 것이 아닌 기억된 값을 돌려주는 기법
+# cache = {}
+# def  fib(n):
+#     if n < 2:
+#         return 1
+#     if n not in cache.keys():
+#         cache[n] = fib(n - 1) + fib(n-2)
+#     return cache[n]
+
+def to_memoization(func):
+    cache = {}
+    def result(n):
+        if n not in cache:
+            cache[n] = func(n)
+        return cache[n]
+    return result
+
+newfib = to_memoization(fibonacci)
+print(newfib(40))
