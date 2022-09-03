@@ -1,0 +1,99 @@
+class point2D:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+
+        def __eq__(self,other):
+            return self.x == other.x and self.y == other.y
+
+        def __ne__(self,other):
+            return not self.__eq__(other)
+
+
+class ThreeItem:
+    def __init__(self,item1,item2,item3):
+        self.item1 = item1
+        self.item2 = item2
+        self.item3 = item3
+
+class Node:
+
+    def __init__(self,data,link = None):
+        self.link = link
+        self.data = data
+
+
+
+b = Node(2)
+a=  Node(1,b)
+print(a.data)
+print(a.link.data)
+print(a.link.link)
+
+class MyList:
+    def __init__(self,*args,):
+        self.head = None
+        self.tail = None
+        self.length = 0
+        for i in args:
+            self.append(i)
+
+    def append(self,data):
+        node = Node(data)
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.link = node
+            self.tail = node
+        self.length += 1
+
+    def __iter__(self):
+        def gen():
+            curr = self.head
+            while curr is not None:
+                yield curr.data
+                curr = curr.link
+        return gen()
+
+    def __len__(self):
+        return self.length
+
+    def __str__(self):
+        s = '<'
+        for idx, data in enumerate(self):
+            s += str(data)
+            if idx < len(self) - 1:
+                s += ", "
+            else:
+                s += ">"
+        return s
+
+    def __getitem__(self, item):
+        if type(item) is not int:
+            raise TypeError
+        
+        if item < 0:
+            item = len(self) + item
+        
+        if item >= len(self) or item <0:
+            raise IndexError
+        
+        for idx, data in enumerate(self):
+            if idx == item:
+                return data
+            
+    def __setitem__(self, key, value):
+        if type(key) is not int:
+            raise TypeError()
+        
+        if key < 0:
+            item = len(self) + key
+        
+        if key >= len(self or key) < 0:
+            raise IndexError()
+        
+        curr = self.head
+        for i in range(key):
+            curr = curr.link
+        curr.data = value
