@@ -1,0 +1,61 @@
+int dust_sensor = A0;
+float dust_value = 0;
+float dustDensityug= 0;
+
+int sensor_led = 12;
+int sampling = 280;
+int waiting = 40;
+float stop_time = 9600;
+
+float dust_init = 0;
+float dust_initial = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(sensor_led,OUTPUT);
+
+for(int i = 0 ; i  <5 ; i ++){
+digitalWrite(sensor_led,LOW);
+delayMicroseconds(sampling);
+dust_init += analogRead(dust_sensor);
+delayMicroseconds(waiting);
+digitalWrite(sensor_led,HIGH);
+delayMicroseconds(stop_time);
+}
+dust_initial = (((dust_init/5)*5.0)/1024.0);
+Serial.print("dust_initial : ");
+Serial.println(dust_initial);
+}
+
+void loop() {
+  digitalWrite(sensor_led,LOW);
+  delayMicroseconds(sampling);
+
+  dust_value = analogRead(dust_sensor);
+
+  delayMicroseconds(waiting);
+  
+  digitalWrite(sensor_led, HIGH);
+  delayMicroseconds(stop_time);
+
+  dustDensityug = (((dust_value * (5.0 / 1024))- dust_initial)/ 0.005);
+  Serial.print("dust Density [ug/m^3]:");
+  Serial.print(dustDensityug);
+
+  if(dustDensityug <= 30.0){
+  Serial.print(" ");
+  Serial.println("Good");}
+  else if(30.0 < dustDensityug && dustDensityug <= 80.0){
+  Serial.print(" ");
+  Serial.println("normal");}
+  else if(80.0 < dustDensityug && dustDensityug <= 150.0){
+  Serial.print(" ");
+  Serial.println("Bad");}  
+  else {
+  Serial.print(" ");
+  Serial.println("warning");}
+    
+  // put your main code here, to run repeatedly:
+delay(1000);
+}
